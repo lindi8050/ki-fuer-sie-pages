@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahnarztpraxis Wallisellen — Ihre Zahnärzte für Allgemein-, Ästhetische & Notfallbehandlung</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2B6CB0;--primary-light:#4299E1;--accent:#63B3ED;--dark:#1a202c;--light:#F7FAFC;--glass:rgba(255,255,255,0.15)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);line-height:1.7;overflow-x:hidden}
+
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;background:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80') center/cover fixed;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,32,44,.8),rgba(43,108,176,.5))}
+.hero-content{position:relative;z-index:2;padding:2rem;max-width:850px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5.5vw,4rem);color:#fff;margin-bottom:.5rem;letter-spacing:.5px;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero .tagline{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.9);font-weight:300;margin-bottom:1rem;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero .emergency{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:.8rem 1.5rem;color:#fff;font-size:1rem;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .8s forwards}
+.cta-btn{display:inline-block;padding:1rem 2.5rem;background:var(--accent);color:var(--dark);text-decoration:none;border-radius:50px;font-weight:700;font-size:1.1rem;transition:all .3s;opacity:0;animation:fadeUp .8s 1s forwards;box-shadow:0 4px 25px rgba(99,179,237,.4)}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(99,179,237,.6);background:#fff}
+
+section{padding:5rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);text-align:center;margin-bottom:1rem;color:var(--dark)}
+.section-subtitle{text-align:center;color:#718096;font-size:1.1rem;margin-bottom:3rem;max-width:650px;margin-left:auto;margin-right:auto}
+
+.about{background:var(--light)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-img{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.1)}
+.about-img img{width:100%;height:400px;object-fit:cover;display:block}
+.about-text p{margin-bottom:1.2rem;color:#4A5568;font-size:1.05rem}
+.trust-badges{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.badge{background:white;border-radius:12px;padding:.8rem 1.2rem;box-shadow:0 4px 15px rgba(0,0,0,.06);font-size:.9rem;font-weight:600;color:var(--primary)}
+
+.services{background:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.service-card{background:var(--light);border-radius:16px;padding:2.5rem 2rem;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.08)}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.8rem;color:var(--dark)}
+.service-card p{color:#4A5568;font-size:.95rem;margin-bottom:1rem}
+.service-price{font-weight:700;color:var(--primary);font-size:1.1rem}
+
+.gallery{background:var(--light)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.gallery-item{border-radius:16px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.08)}
+
+.reviews{background:#fff}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.review-card{background:var(--light);border-radius:16px;padding:2rem;border:1px solid rgba(43,108,176,.08)}
+.stars{color:#ECC94B;font-size:1.3rem;margin-bottom:.8rem}
+.review-card p{color:#4A5568;font-style:italic;margin-bottom:1rem;font-size:1.05rem}
+.review-author{font-weight:600;color:var(--dark)}
+
+.location{background:linear-gradient(135deg,var(--dark) 0%,#2D3748 100%);color:#fff}
+.location .section-title,.location .section-subtitle{color:#fff}
+.location .section-subtitle{color:rgba(255,255,255,.7)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.location-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem;color:var(--accent)}
+.location-info p{margin-bottom:.8rem;color:rgba(255,255,255,.8)}
+.location-info a{color:var(--accent);text-decoration:none}
+.hours-table{width:100%}
+.hours-table td{padding:.5rem 0;color:rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.1)}
+.hours-table td:last-child{text-align:right}
+.phone-cta{display:inline-block;margin-top:1.5rem;padding:.8rem 2rem;background:var(--accent);color:var(--dark);text-decoration:none;border-radius:50px;font-weight:700;transition:all .3s}
+.phone-cta:hover{background:#fff;transform:translateY(-2px)}
+.emergency-cta{display:inline-block;margin-top:.8rem;margin-left:1rem;padding:.8rem 2rem;background:transparent;border:2px solid #FC8181;color:#FC8181;text-decoration:none;border-radius:50px;font-weight:600;transition:all .3s}
+.emergency-cta:hover{background:#FC8181;color:#fff}
+
+footer{background:#111;color:rgba(255,255,255,.6);text-align:center;padding:2.5rem 1.5rem}
+footer a{color:var(--accent);text-decoration:none}
+.back-top{display:inline-block;margin-top:1rem;padding:.5rem 1.5rem;border:1px solid rgba(255,255,255,.2);border-radius:50px;color:#fff;text-decoration:none;font-size:.9rem;transition:all .3s}
+.back-top:hover{background:rgba(255,255,255,.1)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .about-grid,.location-grid{grid-template-columns:1fr}
+  section{padding:3.5rem 1.2rem}
+  .about-img img{height:280px}
+  .trust-badges{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Zahnarztpraxis Wallisellen</h1>
+    <p class="tagline">Allgemeine, ästhetische & Notfall-Zahnmedizin — kompetent und einfühlsam</p>
+    <div class="emergency">🚨 Zahnnotfall? Wir sind auch kurzfristig für Sie da.</div>
+    <br>
+    <a href="tel:+41448300221" class="cta-btn">☎ Termin: 044 830 02 21</a>
+  </div>
+</section>
+
+<section class="about" id="ueber-uns">
+  <div class="container">
+    <h2 class="section-title">Zahnmedizin, die sich gut anfühlt</h2>
+    <p class="section-subtitle">Modern, menschlich, mitten in Wallisellen</p>
+    <div class="about-grid">
+      <div class="about-img fade-in">
+        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Zahnarztpraxis Wallisellen">
+      </div>
+      <div class="about-text fade-in">
+        <p>Niemand geht gerne zum Zahnarzt. Das wissen wir. Genau deshalb haben wir an der Rotackerstrasse 30 eine Praxis geschaffen, in der Sie sich wohlfühlen sollen — von der Begrüssung an der Rezeption bis zum letzten Handgriff im Behandlungsstuhl.</p>
+        <p>Unser Team verbindet modernste Behandlungsmethoden mit echtem Einfühlungsvermögen. Ob Routinekontrolle, ästhetische Zahnkorrektur oder ein akuter Notfall am Wochenende — wir sind für Sie da, ohne lange Wartezeiten und mit klarer, verständlicher Beratung.</p>
+        <p>Wir glauben: Gute Zahnmedizin beginnt mit Zuhören. Und endet mit einem Lächeln, das Sie gerne zeigen.</p>
+        <div class="trust-badges">
+          <span class="badge">🦷 Allgemein</span>
+          <span class="badge">✨ Ästhetisch</span>
+          <span class="badge">🚨 Notfall</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="dienstleistungen">
+  <div class="container">
+    <h2 class="section-title">Unsere Leistungen</h2>
+    <p class="section-subtitle">Umfassende Zahnmedizin für die ganze Familie</p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <h3>Prophylaxe & Dentalhygiene</h3>
+        <p>Professionelle Zahnreinigung, Zahnsteinentfernung und individuelle Mundhygiene-Beratung für langfristig gesunde Zähne.</p>
+        <span class="service-price">ab CHF 150.–</span>
+      </div>
+      <div class="service-card fade-in">
+        <h3>Füllungen & Kariesbehandlung</h3>
+        <p>Hochwertige, zahnfarbene Kompositfüllungen — unsichtbar und langlebig. Schmerzfreie Behandlung dank moderner Anästhesie.</p>
+        <span class="service-price">ab CHF 180.–</span>
+      </div>
+      <div class="service-card fade-in">
+        <h3>Ästhetische Zahnmedizin</h3>
+        <p>Bleaching, Veneers und Zahnkorrekturen für ein strahlendes Lächeln. Diskrete Behandlung, natürliches Ergebnis.</p>
+        <span class="service-price">ab CHF 350.–</span>
+      </div>
+      <div class="service-card fade-in">
+        <h3>Kronen & Brücken</h3>
+        <p>Massgeschneiderte Zahnprothetik aus modernsten Materialien — funktional, ästhetisch und langlebig.</p>
+        <span class="service-price">ab CHF 1'200.–</span>
+      </div>
+      <div class="service-card fade-in">
+        <h3>Wurzelbehandlung</h3>
+        <p>Endodontische Therapie mit hochpräziser Technik. Wir retten Ihren Zahn, wenn es noch möglich ist.</p>
+        <span class="service-price">ab CHF 400.–</span>
+      </div>
+      <div class="service-card fade-in">
+        <h3>Notfallbehandlung</h3>
+        <p>Akute Zahnschmerzen, abgebrochene Zähne, verlorene Füllungen — rufen Sie an, wir helfen schnell und unkompliziert.</p>
+        <span class="service-price">Nach Aufwand</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="praxis">
+  <div class="container">
+    <h2 class="section-title">Unsere Praxis</h2>
+    <p class="section-subtitle">Moderne Ausstattung in heller, einladender Atmosphäre</p>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-in"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80" alt="Behandlungsraum"></div>
+      <div class="gallery-item fade-in"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80" alt="Zahnärztliche Instrumente"></div>
+      <div class="gallery-item fade-in"><img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=80" alt="Moderne Praxis"></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="bewertungen">
+  <div class="container">
+    <h2 class="section-title">Patientenstimmen</h2>
+    <p class="section-subtitle">Was unsere Patientinnen und Patienten über uns sagen</p>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="stars">★★★★★</div>
+        <p>«Hatte panische Angst vor dem Zahnarzt. Hier wurde ich so einfühlsam behandelt, dass ich zum ersten Mal seit Jahren wieder regelmässig gehe. Danke!»</p>
+        <span class="review-author">— Thomas W.</span>
+      </div>
+      <div class="review-card fade-in">
+        <div class="stars">★★★★★</div>
+        <p>«Notfall am Samstagmorgen — innerhalb einer Stunde hatte ich einen Termin. Schnelle, professionelle Hilfe. So muss das sein.»</p>
+        <span class="review-author">— Maria S.</span>
+      </div>
+      <div class="review-card fade-in">
+        <div class="stars">★★★★★</div>
+        <p>«Endlich eine Praxis, die sich Zeit nimmt und alles verständlich erklärt. Die Dentalhygiene hier ist top — meine Zähne waren noch nie so sauber.»</p>
+        <span class="review-author">— Stefan L.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="kontakt">
+  <div class="container">
+    <h2 class="section-title">Anfahrt & Kontakt</h2>
+    <p class="section-subtitle">Zentral gelegen in Wallisellen — auch mit ÖV bestens erreichbar</p>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>📍 Adresse</h3>
+        <p>Rotackerstrasse 30<br>8304 Wallisellen</p>
+        <h3 style="margin-top:1.5rem">📞 Kontakt</h3>
+        <p><a href="tel:+41448300221">044 830 02 21</a></p>
+        <a href="tel:+41448300221" class="phone-cta">Termin vereinbaren</a>
+        <a href="tel:+41448300221" class="emergency-cta">🚨 Notfall</a>
+      </div>
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem;color:var(--accent)">🕐 Sprechzeiten</h3>
+        <table class="hours-table">
+          <tr><td>Montag</td><td>08:00 – 12:00 / 13:30 – 17:30</td></tr>
+          <tr><td>Dienstag</td><td>08:00 – 12:00 / 13:30 – 17:30</td></tr>
+          <tr><td>Mittwoch</td><td>08:00 – 12:00 / 13:30 – 17:30</td></tr>
+          <tr><td>Donnerstag</td><td>08:00 – 12:00 / 13:30 – 19:00</td></tr>
+          <tr><td>Freitag</td><td>08:00 – 12:00 / 13:30 – 16:00</td></tr>
+          <tr><td>Samstag</td><td>Nur Notfälle</td></tr>
+          <tr><td>Sonntag</td><td>Geschlossen</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Zahnarztpraxis Wallisellen. Alle Rechte vorbehalten.</p>
+  <p style="margin-top:.5rem">
+    <a href="#">Google Maps</a> &nbsp;·&nbsp; <a href="tel:+41448300221">044 830 02 21</a>
+  </p>
+  <a href="#" class="back-top">↑ Nach oben</a>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.15});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

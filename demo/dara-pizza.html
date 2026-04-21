@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dara Pizza — Pizzeria in Wallisellen</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#c0392b;--primary-light:#e74c3c;--accent:#f39c12;--dark:#1a1209;--light:#fdf8f0;--glass:rgba(255,255,255,0.12);--glass-border:rgba(192,57,43,0.25);--text:#2c2c2c;--text-light:#7a7a7a;--radius:16px;--shadow:0 8px 32px rgba(0,0,0,0.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp 0.8s ease forwards}
+.reveal-left{opacity:0}.reveal-left.visible{animation:slideLeft 0.8s ease forwards}
+.reveal-right{opacity:0}.reveal-right.visible{animation:slideRight 0.8s ease forwards}
+.reveal-scale{opacity:0}.reveal-scale.visible{animation:scaleIn 0.8s ease forwards}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.4s}
+nav.scrolled{background:rgba(26,18,9,0.95);backdrop-filter:blur(20px);padding:0.8rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;text-decoration:none;font-weight:700}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.nav-toggle span{width:25px;height:2px;background:#fff;transition:0.3s}
+
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1400&q=80') center/cover no-repeat;will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,18,9,0.8),rgba(192,57,43,0.25))}
+.hero-content{position:relative;z-index:2;color:#fff;max-width:800px;padding:0 2rem;animation:fadeUp 1.2s ease 0.3s both}
+.hero-content h1{font-size:clamp(2.5rem,6vw,4.5rem);margin-bottom:1rem;line-height:1.1}
+.hero-content h1 span{color:var(--accent)}
+.hero-content p{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.8);margin-bottom:2.5rem;font-weight:300;line-height:1.7}
+
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2.5rem;border-radius:50px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;text-decoration:none;transition:all 0.4s;cursor:pointer;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(192,57,43,0.4)}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+section{padding:6rem 2rem}
+.section-header{text-align:center;max-width:600px;margin:0 auto 4rem}
+.section-header h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
+.section-header p{color:var(--text-light);font-size:1.05rem;line-height:1.7}
+.section-label{display:inline-block;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--primary);margin-bottom:0.8rem}
+
+.about{background:#fff}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:center}
+.about-image{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5}
+.about-image img{width:100%;height:100%;object-fit:cover}
+.about-text h2{font-size:2.5rem;margin-bottom:1.5rem}
+.about-text p{color:var(--text-light);line-height:1.8;margin-bottom:1rem}
+
+.services{background:var(--light)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+.menu-card{background:#fff;border-radius:var(--radius);padding:2rem;display:flex;gap:1.5rem;align-items:start;transition:all 0.4s;border:1px solid rgba(0,0,0,0.05)}
+.menu-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.menu-number{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--primary);opacity:0.3;line-height:1;min-width:40px}
+.menu-card h3{font-size:1.15rem;margin-bottom:0.5rem}
+.menu-card p{color:var(--text-light);font-size:0.9rem;line-height:1.5;margin-bottom:0.5rem}
+.menu-price{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--primary);font-weight:700}
+
+.gallery{background:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1200px;margin:0 auto}
+.gallery-item{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;cursor:pointer;position:relative}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.gallery-item:hover img{transform:scale(1.1)}
+.gallery-item:nth-child(1){grid-row:span 2}
+
+.reviews{background:var(--dark);color:#fff}
+.reviews .section-header h2{color:#fff}.reviews .section-header p{color:rgba(255,255,255,0.6)}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+.review-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:2.5rem;position:relative}
+.review-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--primary);position:absolute;top:0.5rem;left:1.5rem;line-height:1;opacity:0.4}
+.review-card p{font-style:italic;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:1.5rem;position:relative;z-index:1}
+.review-author{display:flex;align-items:center;gap:1rem}
+.review-avatar{width:45px;height:45px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff}
+.review-name{font-weight:600;font-size:0.95rem}.review-stars{color:var(--accent);font-size:0.85rem;margin-top:0.2rem}
+
+.location{background:var(--light)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:start}
+.location-info h3{font-size:1.8rem;margin-bottom:2rem}
+.info-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:start}
+.info-icon{width:45px;height:45px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.info-item h4{font-size:1rem;margin-bottom:0.3rem}.info-item p{color:var(--text-light);font-size:0.95rem;line-height:1.5}
+.hours-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.hours-table td{padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.95rem}
+.hours-table td:last-child{text-align:right;color:var(--text-light)}
+.map-container{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;background:var(--dark)}
+.map-container iframe{width:100%;height:100%;border:none}
+
+footer{background:var(--dark);color:#fff;padding:4rem 2rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto}
+.footer-brand h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1rem}
+.footer-brand p{color:rgba(255,255,255,0.5);line-height:1.7;font-size:0.95rem}
+.footer-links h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2rem;color:var(--accent)}
+.footer-links ul{list-style:none}.footer-links li{margin-bottom:0.8rem}
+.footer-links a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;font-size:0.9rem}.footer-links a:hover{color:var(--accent)}
+.footer-social{display:flex;gap:1rem;margin-top:1.5rem}
+.social-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;transition:all 0.3s}
+.social-icon:hover{background:var(--primary);transform:translateY(-3px)}
+.footer-bottom{text-align:center;padding-top:3rem;margin-top:3rem;border-top:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);font-size:0.85rem;max-width:1100px;margin-left:auto;margin-right:auto}
+
+.back-top{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;opacity:0;visibility:hidden;transition:all 0.4s;z-index:999}
+.back-top.visible{opacity:1;visibility:visible}.back-top:hover{transform:translateY(-3px)}
+
+@media(max-width:968px){.about-grid,.location-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr}.gallery-item:nth-child(1){grid-row:auto}}
+@media(max-width:768px){.nav-links{position:fixed;top:0;right:-100%;width:70%;height:100vh;background:rgba(26,18,9,0.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;transition:right 0.4s;gap:2.5rem}.nav-links.open{right:0}.nav-toggle{display:flex}section{padding:4rem 1.5rem}.menu-grid,.reviews-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#" class="nav-logo">Dara Pizza</a>
+<ul class="nav-links">
+<li><a href="#about">Über uns</a></li>
+<li><a href="#menu">Speisekarte</a></li>
+<li><a href="#gallery">Galerie</a></li>
+<li><a href="#reviews">Bewertungen</a></li>
+<li><a href="#location">Kontakt</a></li>
+</ul>
+<div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero" id="hero">
+<div class="hero-bg"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>Echte Pizza. <span>Ehrliches Handwerk.</span></h1>
+<p>Dara Pizza in Wallisellen — hier wird der Teig noch von Hand gezogen, die Sauce aus sonnengereiften Tomaten gekocht und jede Pizza im heissen Ofen gebacken, bis der Rand knusprig und der Käse goldbraun ist.</p>
+<a href="tel:+41448204430" class="btn btn-primary">✆ 044 820 44 30</a>
+<a href="#menu" class="btn btn-outline" style="margin-left:1rem">Speisekarte</a>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="about-grid">
+<div class="about-image reveal-left">
+<img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=800&q=80" alt="Dara Pizza Küche">
+</div>
+<div class="about-text reveal-right">
+<span class="section-label">Unsere Küche</span>
+<h2>Pizza ist kein Fast Food — Pizza ist Kultur</h2>
+<p>In einer Zeit, in der alles schnell gehen muss, nehmen wir uns bewusst Zeit. Unser Teig ruht mindestens 24 Stunden. Unsere Zutaten kommen von Lieferanten, die wir persönlich kennen. Und unser Ofen heizt auf Temperaturen, bei denen die Magie passiert.</p>
+<p>Dara Pizza ist kein Franchise, kein Konzept aus dem Lehrbuch — sondern ein Familienprojekt, das aus Leidenschaft für gutes Essen entstanden ist. An der Alten Winterthurerstrasse backen wir Pizzen, die nach etwas schmecken: nach ehrlichem Handwerk, nach Tradition und nach dem unbedingten Willen, es besser zu machen als nötig.</p>
+<p>Ob klassische Margherita oder kreative Eigenkreation — bei uns zählt jeder Bissen.</p>
+</div>
+</div>
+</section>
+
+<section class="services" id="menu">
+<div class="section-header reveal">
+<span class="section-label">Unsere Karte</span>
+<h2>Pizza & mehr</h2>
+<p>Handgezogener Teig, hausgemachte Tomatensauce, Mozzarella aus Italien.</p>
+</div>
+<div class="menu-grid">
+<div class="menu-card reveal">
+<div class="menu-number">01</div>
+<div><h3>Margherita</h3><p>Tomatensauce, Mozzarella, frisches Basilikum — der Klassiker in Perfektion.</p><span class="menu-price">CHF 16.–</span></div>
+</div>
+<div class="menu-card reveal">
+<div class="menu-number">02</div>
+<div><h3>Prosciutto e Funghi</h3><p>Schinken, frische Champignons, Mozzarella — herzhaft und aromatisch.</p><span class="menu-price">CHF 20.–</span></div>
+</div>
+<div class="menu-card reveal">
+<div class="menu-number">03</div>
+<div><h3>Diavola</h3><p>Scharfe Salami, Peperoncini, Mozzarella — für alle, die es feurig mögen.</p><span class="menu-price">CHF 21.–</span></div>
+</div>
+<div class="menu-card reveal">
+<div class="menu-number">04</div>
+<div><h3>Quattro Formaggi</h3><p>Mozzarella, Gorgonzola, Parmesan, Fontina — ein Fest für Käseliebhaber.</p><span class="menu-price">CHF 22.–</span></div>
+</div>
+<div class="menu-card reveal">
+<div class="menu-number">05</div>
+<div><h3>Calzone</h3><p>Gefaltete Pizza mit Schinken, Pilzen, Ricotta und Mozzarella — knusprig verschlossen.</p><span class="menu-price">CHF 23.–</span></div>
+</div>
+<div class="menu-card reveal">
+<div class="menu-number">06</div>
+<div><h3>Insalata Mista</h3><p>Gemischter Salat mit hausgemachtem Dressing — frisch und knackig als Beilage.</p><span class="menu-price">CHF 9.50</span></div>
+</div>
+</div>
+</section>
+
+<section class="gallery" id="gallery">
+<div class="section-header reveal">
+<span class="section-label">Impressionen</span>
+<h2>Aus unserer Küche</h2>
+<p>Knuspriger Teig, goldener Käse, frische Zutaten — so sieht Glück aus.</p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80" alt="Pizza"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80" alt="Margherita"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" alt="Ofen"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=80" alt="Zutaten"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Restaurant"></div>
+</div>
+</section>
+
+<section class="reviews" id="reviews">
+<div class="section-header reveal">
+<span class="section-label">Gästestimmen</span>
+<h2>Was unsere Gäste sagen</h2>
+<p>Die beste Werbung kommt vom Tisch nebenan.</p>
+</div>
+<div class="reviews-grid">
+<div class="review-card reveal">
+<p>Endlich eine Pizzeria in Wallisellen, wo die Pizza wirklich schmeckt. Der Teig ist genau richtig — aussen knusprig, innen luftig. Besser als manches in Zürich.</p>
+<div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">Daniel S.</div><div class="review-stars">★★★★★</div></div></div>
+</div>
+<div class="review-card reveal">
+<p>Wir bestellen mindestens zweimal im Monat bei Dara Pizza. Die Quattro Formaggi ist legendär und die Lieferung immer pünktlich und noch heiss.</p>
+<div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Anna T.</div><div class="review-stars">★★★★★</div></div></div>
+</div>
+<div class="review-card reveal">
+<p>Das Preis-Leistungs-Verhältnis stimmt hier einfach. Grosse Portionen, frische Zutaten, freundlicher Service. Was will man mehr?</p>
+<div class="review-author"><div class="review-avatar">F</div><div><div class="review-name">Fabian K.</div><div class="review-stars">★★★★</div></div></div>
+</div>
+</div>
+</section>
+
+<section class="location" id="location">
+<div class="section-header reveal"><span class="section-label">Finde uns</span><h2>Standort & Öffnungszeiten</h2></div>
+<div class="location-grid">
+<div class="location-info reveal-left">
+<h3>Komm vorbei oder ruf an</h3>
+<div class="info-item"><div class="info-icon">📍</div><div><h4>Adresse</h4><p>Alte Winterthurerstrasse 534<br>8304 Wallisellen</p></div></div>
+<div class="info-item"><div class="info-icon">📞</div><div><h4>Bestellung & Reservation</h4><p><a href="tel:+41448204430" style="color:var(--primary);text-decoration:none;font-weight:600">044 820 44 30</a></p></div></div>
+<div class="info-item"><div class="info-icon">🕐</div><div>
+<h4>Öffnungszeiten</h4>
+<table class="hours-table">
+<tr><td>Montag</td><td>Geschlossen</td></tr>
+<tr><td>Dienstag – Donnerstag</td><td>11:00 – 14:00 / 17:00 – 22:00</td></tr>
+<tr><td>Freitag – Samstag</td><td>11:00 – 14:00 / 17:00 – 23:00</td></tr>
+<tr><td>Sonntag</td><td>17:00 – 22:00</td></tr>
+</table>
+</div></div>
+</div>
+<div class="map-container reveal-right">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700!2d8.598!3d47.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI0JzU4IiBOIDjCsDM1JzUzIiBF!5e0!3m2!1sde!2sch!4v1" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand"><h3>Dara Pizza</h3><p>Authentische Pizza aus dem Ofen — handgezogener Teig, frische Zutaten, echtes Handwerk. Dein Lieblingsitaliener an der Alten Winterthurerstrasse in Wallisellen.</p>
+<div class="footer-social"><a href="#" class="social-icon">f</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">✉</a></div></div>
+<div class="footer-links"><h4>Navigation</h4><ul><li><a href="#about">Über uns</a></li><li><a href="#menu">Speisekarte</a></li><li><a href="#gallery">Galerie</a></li><li><a href="#reviews">Bewertungen</a></li><li><a href="#location">Kontakt</a></li></ul></div>
+<div class="footer-links"><h4>Kontakt</h4><ul><li><a href="tel:+41448204430">044 820 44 30</a></li><li><a href="#">Alte Winterthurerstrasse 534</a></li><li><a href="#">8304 Wallisellen</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© 2026 Dara Pizza. Alle Rechte vorbehalten. Buon appetito! 🍕</p></div>
+</footer>
+
+<a href="#hero" class="back-top" id="backTop">↑</a>
+<script>
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.15});
+revealEls.forEach(el=>observer.observe(el));
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);document.getElementById('backTop').classList.toggle('visible',window.scrollY>500)});
+window.addEventListener('scroll',()=>{const h=document.querySelector('.hero-bg');if(h)h.style.transform='translateY('+window.scrollY*0.4+'px)'});
+</script>
+</body>
+</html>

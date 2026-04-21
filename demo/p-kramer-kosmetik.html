@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P. Kramer Kosmetik Institut — Beauty & Wellness in Wallisellen</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#7b6d8e;--primary-light:#9b8fb0;--accent:#a88fba;--dark:#1a1824;--light:#f8f6fa;--glass:rgba(255,255,255,0.12);--glass-border:rgba(168,143,186,0.25);--text:#2c2c2c;--text-light:#7a7a7a;--radius:20px;--shadow:0 8px 32px rgba(0,0,0,0.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp 0.8s ease forwards}
+.reveal-left{opacity:0}.reveal-left.visible{animation:slideLeft 0.8s ease forwards}
+.reveal-right{opacity:0}.reveal-right.visible{animation:slideRight 0.8s ease forwards}
+.reveal-scale{opacity:0}.reveal-scale.visible{animation:scaleIn 0.8s ease forwards}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.4s}
+nav.scrolled{background:rgba(26,24,36,0.95);backdrop-filter:blur(20px);padding:0.8rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.2)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;text-decoration:none;font-weight:700}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.nav-toggle span{width:25px;height:2px;background:#fff;transition:0.3s}
+
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1400&q=80') center/cover no-repeat;will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,24,36,0.78),rgba(123,109,142,0.35))}
+.hero-content{position:relative;z-index:2;color:#fff;max-width:800px;padding:0 2rem;animation:fadeUp 1.2s ease 0.3s both}
+.hero-content h1{font-size:clamp(2.5rem,6vw,4.2rem);margin-bottom:1rem;line-height:1.1}
+.hero-content p{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.8);margin-bottom:2.5rem;font-weight:300;line-height:1.7}
+.hero-tagline{display:inline-flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;justify-content:center}
+.hero-tagline span{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);padding:0.4rem 1rem;border-radius:50px;font-size:0.8rem}
+
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2.5rem;border-radius:50px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;text-decoration:none;transition:all 0.4s;cursor:pointer;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(123,109,142,0.4)}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+section{padding:6rem 2rem}
+.section-header{text-align:center;max-width:620px;margin:0 auto 4rem}
+.section-header h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
+.section-header p{color:var(--text-light);font-size:1.05rem;line-height:1.7}
+.section-label{display:inline-block;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--primary);margin-bottom:0.8rem}
+
+.about{background:#fff}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:center}
+.about-image{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4}
+.about-image img{width:100%;height:100%;object-fit:cover}
+.about-text h2{font-size:2.4rem;margin-bottom:1.5rem}
+.about-text p{color:var(--text-light);line-height:1.8;margin-bottom:1rem}
+
+.services{background:var(--light)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+.service-card{background:#fff;border-radius:var(--radius);padding:2.5rem;transition:all 0.4s;border:1px solid rgba(0,0,0,0.05);position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.service-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.3rem}
+.service-card h3{font-size:1.2rem;margin-bottom:0.8rem}
+.service-card p{color:var(--text-light);font-size:0.95rem;line-height:1.6;margin-bottom:1rem}
+.service-price{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--primary)}
+
+.gallery{background:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1200px;margin:0 auto}
+.gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.gallery-item:hover img{transform:scale(1.1)}
+.gallery-item:nth-child(1){grid-row:span 2}
+
+.reviews{background:var(--dark);color:#fff}
+.reviews .section-header h2{color:#fff}
+.reviews .section-header p{color:rgba(255,255,255,0.6)}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+.review-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:2.5rem;position:relative}
+.review-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--accent);position:absolute;top:0.5rem;left:1.5rem;line-height:1;opacity:0.4}
+.review-card p{font-style:italic;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:1.5rem;position:relative;z-index:1}
+.review-author{display:flex;align-items:center;gap:1rem}
+.review-avatar{width:45px;height:45px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff}
+.review-name{font-weight:600;font-size:0.95rem}
+.review-stars{color:var(--accent);font-size:0.85rem;margin-top:0.2rem}
+
+.location{background:var(--light)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:start}
+.location-info h3{font-size:1.8rem;margin-bottom:2rem}
+.info-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:start}
+.info-icon{width:45px;height:45px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.info-item h4{font-size:1rem;margin-bottom:0.3rem}
+.info-item p{color:var(--text-light);font-size:0.95rem;line-height:1.5}
+.hours-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.hours-table td{padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.95rem}
+.hours-table td:last-child{text-align:right;color:var(--text-light)}
+.map-container{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;background:var(--dark)}
+.map-container iframe{width:100%;height:100%;border:none}
+
+footer{background:var(--dark);color:#fff;padding:4rem 2rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto}
+.footer-brand h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1rem}
+.footer-brand p{color:rgba(255,255,255,0.5);line-height:1.7;font-size:0.95rem}
+.footer-links h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2rem;color:var(--accent)}
+.footer-links ul{list-style:none}.footer-links li{margin-bottom:0.8rem}
+.footer-links a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;font-size:0.9rem}
+.footer-links a:hover{color:var(--accent)}
+.footer-social{display:flex;gap:1rem;margin-top:1.5rem}
+.social-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;transition:all 0.3s}
+.social-icon:hover{background:var(--primary);transform:translateY(-3px)}
+.footer-bottom{text-align:center;padding-top:3rem;margin-top:3rem;border-top:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);font-size:0.85rem;max-width:1100px;margin-left:auto;margin-right:auto}
+
+.back-top{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;opacity:0;visibility:hidden;transition:all 0.4s;box-shadow:0 4px 15px rgba(123,109,142,0.4);z-index:999}
+.back-top.visible{opacity:1;visibility:visible}.back-top:hover{transform:translateY(-3px)}
+
+@media(max-width:968px){.about-grid,.location-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr}.gallery-item:nth-child(1){grid-row:auto}}
+@media(max-width:768px){.nav-links{position:fixed;top:0;right:-100%;width:70%;height:100vh;background:rgba(26,24,36,0.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;transition:right 0.4s;gap:2.5rem}.nav-links.open{right:0}.nav-toggle{display:flex}section{padding:4rem 1.5rem}.services-grid,.reviews-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#" class="nav-logo">P. Kramer Kosmetik</a>
+<ul class="nav-links">
+<li><a href="#about">Über uns</a></li>
+<li><a href="#services">Treatments</a></li>
+<li><a href="#gallery">Galerie</a></li>
+<li><a href="#reviews">Bewertungen</a></li>
+<li><a href="#location">Kontakt</a></li>
+</ul>
+<div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero" id="hero">
+<div class="hero-bg"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-tagline">
+<span>Kosmetik</span><span>Massage</span><span>Anti-Aging</span><span>Spa</span>
+</div>
+<h1>Dein Körper verdient eine Auszeit</h1>
+<p>Das P. Kramer Kosmetik Institut ist dein persönlicher Rückzugsort in Wallisellen — wo Wissenschaft auf Wohlbefinden trifft und jede Behandlung so individuell ist wie deine Haut.</p>
+<a href="tel:+41788102357" class="btn btn-primary">✆ 078 810 23 57</a>
+<a href="#services" class="btn btn-outline" style="margin-left:1rem">Treatments</a>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="about-grid">
+<div class="about-image reveal-left">
+<img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80" alt="Kosmetik Institut">
+</div>
+<div class="about-text reveal-right">
+<span class="section-label">Das Institut</span>
+<h2>Schönheit beginnt mit Vertrauen</h2>
+<p>Seit Jahren ist das P. Kramer Kosmetik Institut ein fester Bestandteil von Wallisellen. An der Querstrasse 4, in ruhiger Lage und dennoch zentral, empfängt dich ein Institut, das Professionalität mit persönlicher Atmosphäre verbindet.</p>
+<p>Inhaberin P. Kramer versteht Kosmetik nicht als Oberfläche, sondern als ganzheitliches Handwerk. Von der Hautanalyse über individuelle Anti-Aging-Konzepte bis hin zu entspannenden Massagen — hier wird nichts dem Zufall überlassen.</p>
+<p>Wir arbeiten ausschliesslich mit Produkten, die wir selbst getestet und für gut befunden haben. Keine Massenware, keine leeren Versprechen — sondern Ergebnisse, die du im Spiegel siehst und in deiner Haut spürst.</p>
+</div>
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="section-header reveal">
+<span class="section-label">Unsere Treatments</span>
+<h2>Ganzheitliche Schönheitspflege</h2>
+<p>Von der Nasenspitze bis zur Fusssohle — wir kümmern uns um dein Wohlbefinden.</p>
+</div>
+<div class="services-grid">
+<div class="service-card reveal">
+<div class="service-icon">✨</div>
+<h3>Gesichtsbehandlung Klassik</h3>
+<p>Reinigung, Peeling, Maske und Abschlusspflege — abgestimmt auf deinen Hauttyp. Für strahlende, vitale Haut.</p>
+<span class="service-price">ab CHF 95.–</span>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">⏳</div>
+<h3>Anti-Aging Treatment</h3>
+<p>Hochkonzentrierte Wirkstoffe, Mikrostrom und Lymphdrainage — das Intensivprogramm gegen erste Fältchen und müde Haut.</p>
+<span class="service-price">ab CHF 150.–</span>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">💆</div>
+<h3>Massage & Wellness</h3>
+<p>Klassische Rückenmassage, Ganzkörper oder Aromatherapie — löse Verspannungen und tanke Energie auf.</p>
+<span class="service-price">ab CHF 80.–</span>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">💅</div>
+<h3>Nagelkosmetik & Maniküre</h3>
+<p>Professionelle Nagelpflege, Shellac oder klassischer Lack — gepflegte Hände von der Expertin.</p>
+<span class="service-price">ab CHF 50.–</span>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">🦶</div>
+<h3>Fusspflege</h3>
+<p>Medizinische und kosmetische Fusspflege — Hornhautentfernung, Nagelpflege und Feuchtigkeitspflege.</p>
+<span class="service-price">ab CHF 60.–</span>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">🌿</div>
+<h3>Haarentfernung</h3>
+<p>Waxing und sanfte Enthaarungstechniken für Beine, Bikinizone, Achseln und Gesicht. Langanhaltend glatt.</p>
+<span class="service-price">ab CHF 25.–</span>
+</div>
+</div>
+</section>
+
+<section class="gallery" id="gallery">
+<div class="section-header reveal">
+<span class="section-label">Atmosphäre</span>
+<h2>Einblick ins Institut</h2>
+<p>Ein Raum, der Ruhe ausstrahlt — noch bevor die Behandlung beginnt.</p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" alt="Behandlungsraum"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&q=80" alt="Kosmetikbehandlung"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbec6e?w=800&q=80" alt="Spa Ambiente"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800&q=80" alt="Massage"></div>
+<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&q=80" alt="Produkte"></div>
+</div>
+</section>
+
+<section class="reviews" id="reviews">
+<div class="section-header reveal">
+<span class="section-label">Erfahrungen</span>
+<h2>Worte unserer Kundinnen</h2>
+<p>Vertrauen, das über Jahre gewachsen ist.</p>
+</div>
+<div class="reviews-grid">
+<div class="review-card reveal">
+<p>Nach jeder Behandlung bei Frau Kramer fühle ich mich wie neugeboren. Sie analysiert meine Haut genau und empfiehlt nur, was wirklich hilft — kein Upselling.</p>
+<div class="review-author"><div class="review-avatar">B</div><div><div class="review-name">Beatrice S.</div><div class="review-stars">★★★★★</div></div></div>
+</div>
+<div class="review-card reveal">
+<p>Die Anti-Aging-Behandlung hat mein Hautbild sichtbar verbessert. Nach sechs Wochen fragten Kolleginnen, ob ich im Urlaub war. War ich nicht — nur bei Kramer.</p>
+<div class="review-author"><div class="review-avatar">E</div><div><div class="review-name">Elena M.</div><div class="review-stars">★★★★★</div></div></div>
+</div>
+<div class="review-card reveal">
+<p>Endlich jemand, der Fusspflege ernst nimmt und nicht nebenbei macht. Gründlich, professionell und in angenehmer Atmosphäre. Komme seit drei Jahren regelmässig.</p>
+<div class="review-author"><div class="review-avatar">G</div><div><div class="review-name">Greta L.</div><div class="review-stars">★★★★★</div></div></div>
+</div>
+</div>
+</section>
+
+<section class="location" id="location">
+<div class="section-header reveal"><span class="section-label">Dein Weg zu uns</span><h2>Standort & Öffnungszeiten</h2></div>
+<div class="location-grid">
+<div class="location-info reveal-left">
+<h3>Besuche uns</h3>
+<div class="info-item"><div class="info-icon">📍</div><div><h4>Adresse</h4><p>Querstrasse 4<br>8304 Wallisellen</p></div></div>
+<div class="info-item"><div class="info-icon">📞</div><div><h4>Termin</h4><p><a href="tel:+41788102357" style="color:var(--primary);text-decoration:none;font-weight:600">078 810 23 57</a></p></div></div>
+<div class="info-item"><div class="info-icon">🕐</div><div>
+<h4>Öffnungszeiten</h4>
+<table class="hours-table">
+<tr><td>Montag – Freitag</td><td>08:30 – 18:30</td></tr>
+<tr><td>Samstag</td><td>09:00 – 14:00</td></tr>
+<tr><td>Sonntag</td><td>Geschlossen</td></tr>
+</table>
+</div></div>
+</div>
+<div class="map-container reveal-right">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d8.594!3d47.412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI0JzQzIk4gOMKwMzUnMzgiRQ!5e0!3m2!1sde!2sch!4v1" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand"><h3>P. Kramer Kosmetik Institut</h3><p>Ganzheitliche Schönheitspflege an der Querstrasse in Wallisellen. Kosmetik, Massage, Fusspflege und Anti-Aging — individuell, professionell, persönlich.</p>
+<div class="footer-social"><a href="#" class="social-icon">f</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">✉</a></div></div>
+<div class="footer-links"><h4>Navigation</h4><ul><li><a href="#about">Das Institut</a></li><li><a href="#services">Treatments</a></li><li><a href="#gallery">Galerie</a></li><li><a href="#reviews">Bewertungen</a></li><li><a href="#location">Kontakt</a></li></ul></div>
+<div class="footer-links"><h4>Kontakt</h4><ul><li><a href="tel:+41788102357">078 810 23 57</a></li><li><a href="#">Querstrasse 4</a></li><li><a href="#">8304 Wallisellen</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© 2026 P. Kramer Kosmetik Institut. Alle Rechte vorbehalten.</p></div>
+</footer>
+
+<a href="#hero" class="back-top" id="backTop">↑</a>
+<script>
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.15});
+revealEls.forEach(el=>observer.observe(el));
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);document.getElementById('backTop').classList.toggle('visible',window.scrollY>500)});
+window.addEventListener('scroll',()=>{const h=document.querySelector('.hero-bg');if(h)h.style.transform='translateY('+window.scrollY*0.4+'px)'});
+</script>
+</body>
+</html>
