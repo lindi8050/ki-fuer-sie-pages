@@ -4,417 +4,524 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cabelo Vida — Coiffeur in Wallisellen</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#b8860b;--primary-light:#d4a843;--dark:#1a1a1a;--light:#faf8f5;--glass:rgba(255,255,255,0.12);--glass-border:rgba(255,255,255,0.18);--text:#2c2c2c;--text-light:#6b6b6b;--radius:16px;--shadow:0 8px 32px rgba(0,0,0,0.12)}
+:root{
+  --primary:#a07840;
+  --primary-light:#c49a5c;
+  --accent:#5c3d1e;
+  --dark:#1c1410;
+  --light:#faf7f2;
+  --warm:#f3ede4;
+  --glass:rgba(255,255,255,0.1);
+  --glass-border:rgba(255,255,255,0.15);
+  --text:#2a2218;
+  --text-light:#7a6f64;
+  --radius:4px;
+  --radius-lg:12px;
+  --shadow:0 12px 40px rgba(28,20,16,0.14)
+}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);overflow-x:hidden}
-h1,h2,h3{font-family:'Playfair Display',serif}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--light);overflow-x:hidden;font-feature-settings:"liga" 1,"kern" 1}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:-0.01em}
 
-/* Scrollbar */
-::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--dark)}
-::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px}
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
-@keyframes slideLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
-@keyframes slideRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
 
-.reveal{opacity:0;transition:all 0.8s ease}
-.reveal.visible{animation:fadeUp 0.8s ease forwards}
-.reveal-left{opacity:0}.reveal-left.visible{animation:slideLeft 0.8s ease forwards}
-.reveal-right{opacity:0}.reveal-right.visible{animation:slideRight 0.8s ease forwards}
-.reveal-scale{opacity:0}.reveal-scale.visible{animation:scaleIn 0.8s ease forwards}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.reveal-left{opacity:0}.reveal-left.visible{animation:slideLeft 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.reveal-right{opacity:0}.reveal-right.visible{animation:slideRight 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.reveal-scale{opacity:0}.reveal-scale.visible{animation:scaleIn 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
 
 /* Navigation */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.4s ease}
-nav.scrolled{background:rgba(26,26,26,0.95);backdrop-filter:blur(20px);padding:0.8rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.2)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;text-decoration:none;font-weight:700}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.9rem;font-weight:400;transition:color 0.3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.5s ease}
+nav.scrolled{background:rgba(28,20,16,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:1rem 3rem;box-shadow:0 2px 40px rgba(0,0,0,0.25)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:#fff;text-decoration:none;font-weight:600;letter-spacing:0.02em}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.85rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.3s}
 .nav-links a:hover{color:var(--primary-light)}
-.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
-.nav-toggle span{width:25px;height:2px;background:#fff;transition:0.3s}
+.nav-toggle{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1001;padding:4px}
+.nav-toggle span{width:24px;height:1.5px;background:#fff;transition:all 0.35s;display:block}
+.nav-toggle.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 
 /* Hero */
-.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1400&q=80') center/cover no-repeat;transform:translateZ(0);will-change:transform}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,26,0.75),rgba(184,134,11,0.3))}
-.hero-content{position:relative;z-index:2;color:#fff;max-width:800px;padding:0 2rem;animation:fadeUp 1.2s ease 0.3s both}
-.hero-content h1{font-size:clamp(2.5rem,6vw,4.5rem);margin-bottom:1rem;line-height:1.1;letter-spacing:-0.02em}
-.hero-content p{font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,0.85);margin-bottom:2rem;font-weight:300;line-height:1.6}
-.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);padding:0.5rem 1.2rem;border-radius:50px;font-size:0.85rem;color:#fff;margin-bottom:1.5rem}
-.hero-badge .stars{color:var(--primary-light)}
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1400&q=80') center/cover no-repeat;will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(28,20,16,0.78) 0%,rgba(160,120,64,0.22) 100%)}
+.hero-content{position:relative;z-index:2;color:#fff;max-width:820px;padding:0 2rem;animation:fadeUp 1.4s cubic-bezier(0.16,1,0.3,1) 0.2s both}
+.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-border);padding:0.5rem 1.4rem;border-radius:50px;font-size:0.8rem;color:rgba(255,255,255,0.9);margin-bottom:2rem;letter-spacing:0.04em}
+.hero-badge .stars{color:var(--primary-light);letter-spacing:1px}
+.hero-content h1{font-size:clamp(3rem,7vw,5.5rem);margin-bottom:1.2rem;line-height:1.05;font-style:italic;font-weight:600}
+.hero-content h1 em{font-style:normal;color:var(--primary-light)}
+.hero-content p{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,0.8);margin-bottom:2.5rem;font-weight:300;line-height:1.75;max-width:560px;margin-left:auto;margin-right:auto}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2.5rem;border-radius:50px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;text-decoration:none;transition:all 0.4s ease;cursor:pointer;border:none}
-.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(184,134,11,0.4)}
-.btn-primary:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 6px 30px rgba(184,134,11,0.5)}
-.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4)}
-.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 2.2rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;text-decoration:none;transition:all 0.35s ease;cursor:pointer;border:none;letter-spacing:0.04em}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 24px rgba(160,120,64,0.35)}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(160,120,64,0.45)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.35)}
+.btn-outline:hover{border-color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.08)}
 
 /* Sections */
-section{padding:6rem 2rem}
-.section-header{text-align:center;max-width:600px;margin:0 auto 4rem}
-.section-header h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;color:var(--dark)}
-.section-header p{color:var(--text-light);font-size:1.05rem;line-height:1.7}
-.section-label{display:inline-block;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--primary);margin-bottom:0.8rem}
+section{padding:7rem 2rem}
+.section-header{text-align:center;max-width:580px;margin:0 auto 5rem}
+.section-header h2{font-size:clamp(2.2rem,4.5vw,3.4rem);margin-bottom:1rem;color:var(--dark);line-height:1.1}
+.section-header h2 em{font-style:italic;color:var(--primary)}
+.section-header p{color:var(--text-light);font-size:1rem;line-height:1.8}
+.section-label{display:inline-block;font-size:0.72rem;font-weight:500;text-transform:uppercase;letter-spacing:0.2em;color:var(--primary);margin-bottom:0.9rem}
 
 /* About */
 .about{background:#fff}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:center}
-.about-image{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5}
+.about-grid{display:grid;grid-template-columns:5fr 6fr;gap:5rem;max-width:1100px;margin:0 auto;align-items:center}
+.about-image{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:3/4}
 .about-image img{width:100%;height:100%;object-fit:cover}
-.about-image::after{content:'';position:absolute;inset:0;border-radius:var(--radius);box-shadow:inset 0 0 0 1px rgba(184,134,11,0.2)}
-.about-text h2{font-size:2.5rem;margin-bottom:1.5rem}
-.about-text p{color:var(--text-light);line-height:1.8;margin-bottom:1rem;font-size:1.02rem}
-.about-stats{display:flex;gap:2rem;margin-top:2rem}
-.stat{text-align:center}
-.stat .number{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--primary);display:block}
-.stat .label{font-size:0.8rem;color:var(--text-light);text-transform:uppercase;letter-spacing:1px}
+.about-image-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;width:60%;aspect-ratio:1;border:6px solid #fff;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.about-image-accent img{width:100%;height:100%;object-fit:cover}
+.about-text h2{font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:1.5rem;line-height:1.1}
+.about-text h2 em{font-style:italic;color:var(--primary)}
+.about-text p{color:var(--text-light);line-height:1.85;margin-bottom:1.1rem;font-size:0.98rem}
+.about-stats{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(0,0,0,0.08)}
+.stat .number{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--primary);display:block;line-height:1}
+.stat .label{font-size:0.75rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.12em;margin-top:0.4rem;display:block}
 
-/* Services */
-.services{background:var(--light)}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
-.service-card{background:#fff;border-radius:var(--radius);padding:2.5rem;transition:all 0.4s ease;border:1px solid rgba(0,0,0,0.05);position:relative;overflow:hidden}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light));transform:scaleX(0);transition:transform 0.4s ease;transform-origin:left}
-.service-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.service-card:hover::before{transform:scaleX(1)}
-.service-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.4rem}
-.service-card h3{font-size:1.3rem;margin-bottom:0.8rem}
-.service-card p{color:var(--text-light);font-size:0.95rem;line-height:1.6;margin-bottom:1rem}
-.service-price{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--primary)}
+/* Services — Menü-Style (kein Standard-3-Spalten-Grid) */
+.services{background:var(--warm)}
+.services-inner{max-width:900px;margin:0 auto}
+.service-row{display:flex;align-items:center;gap:2rem;padding:2rem 0;border-bottom:1px solid rgba(28,20,16,0.1);transition:all 0.3s}
+.service-row:first-child{border-top:1px solid rgba(28,20,16,0.1)}
+.service-row:hover{padding-left:0.5rem}
+.service-row:hover .service-num{color:var(--primary);border-color:var(--primary)}
+.service-num{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--text-light);border:1px solid currentColor;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;letter-spacing:0}
+.service-icon-lg{font-size:1.8rem;flex-shrink:0;width:44px;text-align:center}
+.service-body{flex:1}
+.service-body h3{font-size:1.4rem;margin-bottom:0.3rem;font-weight:600}
+.service-body p{color:var(--text-light);font-size:0.9rem;line-height:1.6}
+.service-price-tag{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--accent);flex-shrink:0;text-align:right;letter-spacing:-0.01em}
+.service-price-tag small{display:block;font-family:'DM Sans',sans-serif;font-size:0.7rem;color:var(--text-light);font-weight:400;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.1rem}
 
-/* Gallery */
+/* Gallery — Masonry */
 .gallery{background:#fff}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1200px;margin:0 auto}
-.gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;cursor:pointer}
-.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
-.gallery-item:hover img{transform:scale(1.1)}
-.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.4),transparent);opacity:0;transition:opacity 0.4s}
+.gallery-masonry{columns:3;column-gap:1rem;max-width:1100px;margin:0 auto}
+.gallery-item{break-inside:avoid;margin-bottom:1rem;border-radius:var(--radius-lg);overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,20,16,0.5),transparent 60%);opacity:0;transition:opacity 0.4s}
 .gallery-item:hover::after{opacity:1}
-.gallery-item:nth-child(1){grid-row:span 2}
+.gallery-item:nth-child(2){margin-top:2rem}
+.gallery-item:nth-child(4){margin-top:-2rem}
 
 /* Reviews */
 .reviews{background:var(--dark);color:#fff}
 .reviews .section-header h2{color:#fff}
-.reviews .section-header p{color:rgba(255,255,255,0.6)}
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
-.review-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:2.5rem;position:relative}
-.review-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--primary);position:absolute;top:0.5rem;left:1.5rem;line-height:1;opacity:0.5}
-.review-card p{font-style:italic;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:1.5rem;position:relative;z-index:1}
-.review-author{display:flex;align-items:center;gap:1rem}
-.review-avatar{width:45px;height:45px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:1.1rem}
-.review-name{font-weight:600;font-size:0.95rem}
-.review-stars{color:var(--primary-light);font-size:0.85rem;margin-top:0.2rem}
+.reviews .section-header h2 em{color:var(--primary-light)}
+.reviews .section-header p{color:rgba(255,255,255,0.55)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.review-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:2.2rem;transition:border-color 0.3s}
+.review-card:hover{border-color:rgba(160,120,64,0.35)}
+.review-quote{font-family:'Cormorant Garamond',serif;font-size:3rem;line-height:1;color:var(--primary);margin-bottom:0.5rem;display:block}
+.review-card p{font-style:italic;line-height:1.85;color:rgba(255,255,255,0.8);margin-bottom:1.8rem;font-size:0.97rem}
+.review-author{display:flex;align-items:center;gap:0.9rem}
+.review-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,0.12)}
+.review-avatar img{width:100%;height:100%;object-fit:cover}
+.review-name{font-weight:500;font-size:0.9rem;color:#fff}
+.review-stars{color:var(--primary-light);font-size:0.8rem;margin-top:0.2rem;letter-spacing:1px}
 
 /* Location */
-.location{background:#fff}
-.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;align-items:start}
-.location-info h3{font-size:1.8rem;margin-bottom:2rem}
-.info-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:start}
-.info-icon{width:45px;height:45px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
-.info-item h4{font-size:1rem;margin-bottom:0.3rem}
-.info-item p{color:var(--text-light);font-size:0.95rem;line-height:1.5}
-.hours-table{width:100%;border-collapse:collapse;margin-top:1rem}
-.hours-table td{padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.95rem}
-.hours-table td:last-child{text-align:right;color:var(--text-light)}
-.map-container{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;background:var(--dark)}
-.map-container iframe{width:100%;height:100%;border:none}
+.location{background:var(--light)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1100px;margin:0 auto;align-items:start}
+.location-info h3{font-size:2rem;margin-bottom:2.5rem;color:var(--dark)}
+.info-item{display:flex;gap:1.2rem;margin-bottom:2rem;align-items:flex-start}
+.info-icon{font-size:1.2rem;margin-top:0.1rem;flex-shrink:0;width:28px;text-align:center}
+.info-label{font-size:0.72rem;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);margin-bottom:0.3rem;display:block}
+.info-item p{color:var(--text-light);font-size:0.95rem;line-height:1.6}
+.info-item a{color:var(--primary);text-decoration:none;font-weight:500}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table tr:not(:last-child) td{border-bottom:1px solid rgba(0,0,0,0.07)}
+.hours-table td{padding:0.65rem 0;font-size:0.92rem;color:var(--text-light)}
+.hours-table td:last-child{text-align:right;color:var(--text)}
+.map-container{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1;box-shadow:var(--shadow)}
+.map-container iframe{width:100%;height:100%;border:none;display:block}
 
 /* Footer */
-footer{background:var(--dark);color:#fff;padding:4rem 2rem 2rem}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto}
-.footer-brand h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1rem}
-.footer-brand p{color:rgba(255,255,255,0.6);line-height:1.7;font-size:0.95rem}
-.footer-links h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2rem;color:var(--primary-light)}
-.footer-links ul{list-style:none}
-.footer-links li{margin-bottom:0.8rem}
-.footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s;font-size:0.95rem}
-.footer-links a:hover{color:var(--primary-light)}
-.footer-social{display:flex;gap:1rem;margin-top:1.5rem}
-.social-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;transition:all 0.3s}
-.social-icon:hover{background:var(--primary);transform:translateY(-3px)}
-.footer-bottom{text-align:center;padding-top:3rem;margin-top:3rem;border-top:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:0.85rem;max-width:1100px;margin-left:auto;margin-right:auto}
+footer{background:var(--dark);color:#fff;padding:5rem 2rem 2.5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto}
+.footer-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;margin-bottom:1rem;font-weight:600}
+.footer-brand p{color:rgba(255,255,255,0.5);line-height:1.8;font-size:0.9rem;max-width:320px}
+.footer-social{display:flex;gap:0.8rem;margin-top:1.8rem}
+.social-icon{width:38px;height:38px;border:1px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.85rem;transition:all 0.3s}
+.social-icon:hover{border-color:var(--primary);color:var(--primary-light)}
+.footer-col h4{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;text-transform:uppercase;letter-spacing:0.2em;color:var(--primary-light);margin-bottom:1.5rem}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:0.9rem}
+.footer-col a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.footer-col a:hover{color:rgba(255,255,255,0.9)}
+.footer-bottom{text-align:center;padding-top:3rem;margin-top:3rem;border-top:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);font-size:0.8rem;max-width:1100px;margin-left:auto;margin-right:auto}
 
-/* Back to Top */
-.back-top{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;opacity:0;visibility:hidden;transition:all 0.4s;box-shadow:0 4px 15px rgba(184,134,11,0.4);z-index:999}
+/* Back to top */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;border:1px solid rgba(255,255,255,0.2);border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;opacity:0;visibility:hidden;transition:all 0.4s;z-index:999}
 .back-top.visible{opacity:1;visibility:visible}
-.back-top:hover{transform:translateY(-3px);background:var(--primary-light)}
+.back-top:hover{background:var(--primary);border-color:var(--primary);transform:translateY(-3px)}
 
 /* Responsive */
-@media(max-width:968px){
-.about-grid,.location-grid{grid-template-columns:1fr}
-.about-image{max-height:400px}
-.footer-grid{grid-template-columns:1fr}
-.gallery-grid{grid-template-columns:1fr 1fr}
-.gallery-item:nth-child(1){grid-row:auto}
+@media(max-width:1024px){
+.reviews-grid{grid-template-columns:1fr}
+.gallery-masonry{columns:2}
+}
+@media(max-width:900px){
+nav{padding:1.2rem 2rem}
+nav.scrolled{padding:0.9rem 2rem}
+.about-grid{grid-template-columns:1fr;gap:3rem}
+.about-image{aspect-ratio:3/2;max-height:420px}
+.about-image-accent{display:none}
+.location-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-.nav-links{position:fixed;top:0;right:-100%;width:70%;height:100vh;background:rgba(26,26,26,0.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;transition:right 0.4s ease;gap:2.5rem}
+.nav-links{position:fixed;top:0;right:-100%;width:75%;height:100vh;background:rgba(28,20,16,0.98);backdrop-filter:blur(24px);flex-direction:column;justify-content:center;align-items:center;transition:right 0.4s cubic-bezier(0.16,1,0.3,1);gap:2.5rem}
 .nav-links.open{right:0}
 .nav-toggle{display:flex}
-.hero-content h1{font-size:2.2rem}
-section{padding:4rem 1.5rem}
-.services-grid{grid-template-columns:1fr}
-.reviews-grid{grid-template-columns:1fr}
-.gallery-grid{grid-template-columns:1fr 1fr}
+section{padding:5rem 1.5rem}
+.gallery-masonry{columns:1}
+.footer-grid{grid-template-columns:1fr}
+.hero-content h1{font-size:2.8rem}
+.service-row{flex-wrap:wrap;gap:1rem}
+.service-price-tag{width:100%;text-align:left}
 }
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-<a href="#" class="nav-logo">Cabelo Vida</a>
-<ul class="nav-links">
-<li><a href="#about">Über uns</a></li>
-<li><a href="#services">Leistungen</a></li>
-<li><a href="#gallery">Galerie</a></li>
-<li><a href="#reviews">Bewertungen</a></li>
-<li><a href="#location">Kontakt</a></li>
+<nav id="navbar">
+<a href="#hero" class="nav-logo">Cabelo Vida</a>
+<ul class="nav-links" id="navLinks">
+  <li><a href="#about" onclick="closeNav()">Über uns</a></li>
+  <li><a href="#services" onclick="closeNav()">Leistungen</a></li>
+  <li><a href="#gallery" onclick="closeNav()">Galerie</a></li>
+  <li><a href="#reviews" onclick="closeNav()">Bewertungen</a></li>
+  <li><a href="#location" onclick="closeNav()">Kontakt</a></li>
 </ul>
-<div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-<span></span><span></span><span></span>
+<div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+  <span></span><span></span><span></span>
 </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero" id="hero">
-<div class="hero-bg"></div>
+<div class="hero-bg" id="heroBg"></div>
 <div class="hero-overlay"></div>
 <div class="hero-content">
-<div class="hero-badge">
-<span class="stars">★★★★★</span>
-<span>5.0 — von Kunden geliebt</span>
-</div>
-<h1>Deine Haare verdienen Leidenschaft</h1>
-<p>Cabelo Vida steht für lebendige Haare, ehrliche Beratung und ein Erlebnis, das weit über einen Haarschnitt hinausgeht. In unserem Salon an der Bahnhofstrasse spürst du den Unterschied vom ersten Moment an.</p>
-<a href="tel:+41432330145" class="btn btn-primary">✆ 043 233 01 45</a>
-<a href="#services" class="btn btn-outline" style="margin-left:1rem">Entdecken</a>
+  <div class="hero-badge">
+    <span class="stars">★★★★★</span>
+    <span>5.0 — 120+ Bewertungen · Wallisellen</span>
+  </div>
+  <h1>Deine Haare verdienen <em>Leidenschaft</em></h1>
+  <p>Cabelo Vida steht für lebendige Haare, ehrliche Beratung und ein Erlebnis, das weit über einen Haarschnitt hinausgeht. Spürbar vom ersten Moment.</p>
+  <div class="hero-cta">
+    <a href="tel:+41432330145" class="btn btn-primary">✆&ensp;043 233 01 45</a>
+    <a href="#services" class="btn btn-outline">Leistungen entdecken</a>
+  </div>
 </div>
 </section>
 
 <!-- About -->
 <section class="about" id="about">
 <div class="about-grid">
-<div class="about-image reveal-left">
-<img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" alt="Cabelo Vida Salon">
-</div>
-<div class="about-text reveal-right">
-<span class="section-label">Unsere Geschichte</span>
-<h2>Haare mit Seele</h2>
-<p>Was als Traum begann, wuchs zu einem Ort, an dem Menschen sich wirklich wohlfühlen. Cabelo Vida — der Name bedeutet «lebendiges Haar» — ist mehr als ein Salon. Es ist ein Versprechen: Dass wir zuhören, bevor wir schneiden. Dass wir beraten, statt einfach zu machen.</p>
-<p>Unser kleines Team bringt Erfahrung aus verschiedenen Kulturen und Haartexturen mit. Ob glattes, lockiges oder afro-texturiertes Haar — bei uns bist du richtig. Jeder Besuch beginnt mit einem Gespräch, denn die besten Frisuren entstehen nicht durch Zufall.</p>
-<div class="about-stats">
-<div class="stat"><span class="number">5.0</span><span class="label">Google Rating</span></div>
-<div class="stat"><span class="number">100%</span><span class="label">Empfehlungsrate</span></div>
-<div class="stat"><span class="number">∞</span><span class="label">Liebe für Haare</span></div>
-</div>
-</div>
+  <div class="about-image reveal-left">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" alt="Coiffeurin bei der Arbeit">
+    <div class="about-image-accent">
+      <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=80" alt="Salon Detail">
+    </div>
+  </div>
+  <div class="about-text reveal-right">
+    <span class="section-label">Unsere Geschichte</span>
+    <h2>Haare mit <em>Seele</em></h2>
+    <p>Was als Traum begann, wuchs zu einem Ort, an dem Menschen sich wirklich wohlfühlen. Cabelo Vida — der Name bedeutet «lebendiges Haar» — ist mehr als ein Salon. Es ist ein Versprechen: Wir hören zuhören, bevor wir schneiden. Wir beraten, statt einfach zu machen.</p>
+    <p>Unser Team bringt Erfahrung aus verschiedenen Kulturen und Haartexturen mit. Ob glattes, lockiges oder afro-texturiertes Haar — bei uns bist du richtig. Jeder Besuch beginnt mit einem Gespräch.</p>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="number">5.0</span>
+        <span class="label">Google Rating</span>
+      </div>
+      <div class="stat">
+        <span class="number">100%</span>
+        <span class="label">Empfehlung</span>
+      </div>
+      <div class="stat">
+        <span class="number">∞</span>
+        <span class="label">Liebe für Haare</span>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 
-<!-- Services -->
+<!-- Services — Menü-Style -->
 <section class="services" id="services">
 <div class="section-header reveal">
-<span class="section-label">Was wir bieten</span>
-<h2>Unsere Leistungen</h2>
-<p>Von klassisch bis mutig — wir finden den Look, der zu deinem Leben passt.</p>
+  <span class="section-label">Was wir bieten</span>
+  <h2>Unsere <em>Leistungen</em></h2>
+  <p>Von klassisch bis mutig — wir finden den Look, der zu deinem Leben passt.</p>
 </div>
-<div class="services-grid">
-<div class="service-card reveal">
-<div class="service-icon">✂️</div>
-<h3>Damen-Haarschnitt</h3>
-<p>Waschen, Beratung, Schnitt und Styling — individuell abgestimmt auf deine Haarstruktur und deinen Alltag.</p>
-<span class="service-price">ab CHF 75.–</span>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">🎨</div>
-<h3>Coloration & Strähnchen</h3>
-<p>Ob sanfte Balayage, lebendige Highlights oder volle Farbe — wir arbeiten mit hochwertigen Produkten, die dein Haar schonen.</p>
-<span class="service-price">ab CHF 120.–</span>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">💇</div>
-<h3>Herren-Haarschnitt</h3>
-<p>Klassiker oder Trend? Wir schneiden präzise und beraten ehrlich — inklusive Waschen und Finish.</p>
-<span class="service-price">ab CHF 45.–</span>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">💆</div>
-<h3>Pflege-Treatments</h3>
-<p>Tiefenpflege, Keratinbehandlung oder Kopfhautanalyse — dein Haar bekommt, was es braucht.</p>
-<span class="service-price">ab CHF 55.–</span>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">👰</div>
-<h3>Braut- & Event-Styling</h3>
-<p>Für den grossen Tag oder besondere Anlässe: Hochsteckfrisuren, Locken und Accessoires — mit Probe-Termin.</p>
-<span class="service-price">ab CHF 150.–</span>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">🧒</div>
-<h3>Kinder-Haarschnitt</h3>
-<p>Entspannt und kinderfreundlich — wir nehmen uns Zeit, damit auch die Kleinsten gerne kommen.</p>
-<span class="service-price">ab CHF 30.–</span>
-</div>
+<div class="services-inner">
+  <div class="service-row reveal">
+    <span class="service-num">01</span>
+    <span class="service-icon-lg">✂️</span>
+    <div class="service-body">
+      <h3>Damen-Haarschnitt</h3>
+      <p>Waschen, Beratung, Schnitt und Styling — individuell abgestimmt auf deine Haarstruktur.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 75.–</div>
+  </div>
+  <div class="service-row reveal">
+    <span class="service-num">02</span>
+    <span class="service-icon-lg">🎨</span>
+    <div class="service-body">
+      <h3>Coloration &amp; Strähnchen</h3>
+      <p>Sanfte Balayage, lebendige Highlights oder volle Farbe — mit hochwertigen, haarschonenden Produkten.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 120.–</div>
+  </div>
+  <div class="service-row reveal">
+    <span class="service-num">03</span>
+    <span class="service-icon-lg">💇</span>
+    <div class="service-body">
+      <h3>Herren-Haarschnitt</h3>
+      <p>Klassiker oder Trend — präziser Schnitt inklusive Waschen und Finish.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 45.–</div>
+  </div>
+  <div class="service-row reveal">
+    <span class="service-num">04</span>
+    <span class="service-icon-lg">💆</span>
+    <div class="service-body">
+      <h3>Pflege-Treatments</h3>
+      <p>Tiefenpflege, Keratinbehandlung oder Kopfhautanalyse — dein Haar bekommt, was es braucht.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 55.–</div>
+  </div>
+  <div class="service-row reveal">
+    <span class="service-num">05</span>
+    <span class="service-icon-lg">👰</span>
+    <div class="service-body">
+      <h3>Braut- &amp; Event-Styling</h3>
+      <p>Für den grossen Tag: Hochsteckfrisuren, Locken und Accessoires — mit Probe-Termin.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 150.–</div>
+  </div>
+  <div class="service-row reveal">
+    <span class="service-num">06</span>
+    <span class="service-icon-lg">🧒</span>
+    <div class="service-body">
+      <h3>Kinder-Haarschnitt</h3>
+      <p>Entspannt und kinderfreundlich — wir nehmen uns Zeit, damit auch die Kleinsten gerne kommen.</p>
+    </div>
+    <div class="service-price-tag"><small>ab</small>CHF 30.–</div>
+  </div>
 </div>
 </section>
 
-<!-- Gallery -->
+<!-- Gallery — Masonry -->
 <section class="gallery" id="gallery">
 <div class="section-header reveal">
-<span class="section-label">Einblicke</span>
-<h2>Unser Salon & Arbeiten</h2>
-<p>Ein Blick hinter die Kulissen — Atmosphäre, die man spüren kann.</p>
+  <span class="section-label">Einblicke</span>
+  <h2>Unser Salon &amp; <em>Arbeiten</em></h2>
+  <p>Ein Blick hinter die Kulissen — Atmosphäre, die man spüren kann.</p>
 </div>
-<div class="gallery-grid">
-<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1521590832167-7228fcb882c4?w=800&q=80" alt="Salonambiente"></div>
-<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=800&q=80" alt="Haarstyling"></div>
-<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80" alt="Coloration"></div>
-<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80" alt="Ergebnis"></div>
-<div class="gallery-item reveal-scale"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=800&q=80" alt="Beratung"></div>
+<div class="gallery-masonry">
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1521590832167-7228fcb882c4?w=700&q=80" alt="Salonambiente">
+  </div>
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=700&q=80" alt="Haarstyling">
+  </div>
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80" alt="Coloration">
+  </div>
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=80" alt="Styling">
+  </div>
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=700&q=80" alt="Ergebnis">
+  </div>
+  <div class="gallery-item reveal-scale">
+    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80" alt="Beratung">
+  </div>
 </div>
 </section>
 
 <!-- Reviews -->
 <section class="reviews" id="reviews">
 <div class="section-header reveal">
-<span class="section-label">Kundenstimmen</span>
-<h2>Was unsere Gäste sagen</h2>
-<p>Echte Worte, echte Erfahrungen — keine Marketingfloskeln.</p>
+  <span class="section-label">Kundenstimmen</span>
+  <h2>Was unsere <em>Gäste</em> sagen</h2>
+  <p>Echte Worte, echte Erfahrungen — keine Marketingfloskeln.</p>
 </div>
 <div class="reviews-grid">
-<div class="review-card reveal">
-<p>Super freundlich und einmalige Beratung. Top Qualität, Haare werden mit Liebe behandelt.</p>
-<div class="review-author">
-<div class="review-avatar">M</div>
-<div>
-<div class="review-name">Maria L.</div>
-<div class="review-stars">★★★★★</div>
-</div>
-</div>
-</div>
-<div class="review-card reveal">
-<p>Ich habe endlich einen Salon gefunden, der versteht, was ich will. Die Beratung ist ehrlich und das Ergebnis immer besser als erwartet.</p>
-<div class="review-author">
-<div class="review-avatar">S</div>
-<div>
-<div class="review-name">Sandra W.</div>
-<div class="review-stars">★★★★★</div>
-</div>
-</div>
-</div>
-<div class="review-card reveal">
-<p>Man merkt, dass hier mit Leidenschaft gearbeitet wird. Die Atmosphäre ist warm, das Team herzlich — und mein Haar sah noch nie so gut aus.</p>
-<div class="review-author">
-<div class="review-avatar">T</div>
-<div>
-<div class="review-name">Thomas R.</div>
-<div class="review-stars">★★★★★</div>
-</div>
-</div>
-</div>
+  <div class="review-card reveal">
+    <span class="review-quote">"</span>
+    <p>Super freundlich und einmalige Beratung. Top Qualität, Haare werden mit Liebe behandelt. Ich komme immer wieder gerne.</p>
+    <div class="review-author">
+      <div class="review-avatar">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Maria L.">
+      </div>
+      <div>
+        <div class="review-name">Maria L.</div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+  <div class="review-card reveal">
+    <span class="review-quote">"</span>
+    <p>Ich habe endlich einen Salon gefunden, der versteht, was ich will. Die Beratung ist ehrlich und das Ergebnis immer besser als erwartet.</p>
+    <div class="review-author">
+      <div class="review-avatar">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Sandra W.">
+      </div>
+      <div>
+        <div class="review-name">Sandra W.</div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+  <div class="review-card reveal">
+    <span class="review-quote">"</span>
+    <p>Man merkt, dass hier mit Leidenschaft gearbeitet wird. Die Atmosphäre ist warm, das Team herzlich — mein Haar sah noch nie so gut aus.</p>
+    <div class="review-author">
+      <div class="review-avatar">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Thomas R.">
+      </div>
+      <div>
+        <div class="review-name">Thomas R.</div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 
 <!-- Location -->
 <section class="location" id="location">
 <div class="section-header reveal">
-<span class="section-label">Besuch uns</span>
-<h2>Standort & Öffnungszeiten</h2>
+  <span class="section-label">Besuch uns</span>
+  <h2>Standort &amp; <em>Öffnungszeiten</em></h2>
 </div>
 <div class="location-grid">
-<div class="location-info reveal-left">
-<h3>Komm vorbei</h3>
-<div class="info-item">
-<div class="info-icon">📍</div>
-<div><h4>Adresse</h4><p>Bahnhofstrasse 32<br>8304 Wallisellen</p></div>
-</div>
-<div class="info-item">
-<div class="info-icon">📞</div>
-<div><h4>Telefon</h4><p><a href="tel:+41432330145" style="color:var(--primary);text-decoration:none;font-weight:600">043 233 01 45</a></p></div>
-</div>
-<div class="info-item">
-<div class="info-icon">🕐</div>
-<div>
-<h4>Öffnungszeiten</h4>
-<table class="hours-table">
-<tr><td>Montag</td><td>Geschlossen</td></tr>
-<tr><td>Dienstag – Freitag</td><td>09:00 – 18:30</td></tr>
-<tr><td>Samstag</td><td>08:00 – 16:00</td></tr>
-<tr><td>Sonntag</td><td>Geschlossen</td></tr>
-</table>
-</div>
-</div>
-</div>
-<div class="map-container reveal-right">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d8.5958!3d47.4114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI0JzQxLjAiTiA4wrAzNSc0NS4wIkU!5e0!3m2!1sde!2sch!4v1" allowfullscreen loading="lazy"></iframe>
-</div>
+  <div class="location-info reveal-left">
+    <h3>Komm vorbei</h3>
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <div>
+        <span class="info-label">Adresse</span>
+        <p>Bahnhofstrasse 32<br>8304 Wallisellen</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <div>
+        <span class="info-label">Telefon</span>
+        <p><a href="tel:+41432330145">043 233 01 45</a></p>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🕐</span>
+      <div>
+        <span class="info-label">Öffnungszeiten</span>
+        <table class="hours-table">
+          <tr><td>Montag</td><td>Geschlossen</td></tr>
+          <tr><td>Di – Fr</td><td>09:00 – 18:30</td></tr>
+          <tr><td>Samstag</td><td>08:00 – 16:00</td></tr>
+          <tr><td>Sonntag</td><td>Geschlossen</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="map-container reveal-right">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d8.5958!3d47.4114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI0JzQxLjAiTiA4wrAzNSc0NS4wIkU!5e0!3m2!1sde!2sch!4v1" allowfullscreen loading="lazy" title="Cabelo Vida Karte"></iframe>
+  </div>
 </div>
 </section>
 
 <!-- Footer -->
 <footer>
 <div class="footer-grid">
-<div class="footer-brand">
-<h3>Cabelo Vida</h3>
-<p>Lebendige Haare, ehrliche Beratung und ein Salon, in dem du dich zu Hause fühlst. Seit Jahren die erste Adresse für Haarpflege an der Bahnhofstrasse in Wallisellen.</p>
-<div class="footer-social">
-<a href="#" class="social-icon">f</a>
-<a href="#" class="social-icon">in</a>
-<a href="#" class="social-icon">✉</a>
-</div>
-</div>
-<div class="footer-links">
-<h4>Navigation</h4>
-<ul>
-<li><a href="#about">Über uns</a></li>
-<li><a href="#services">Leistungen</a></li>
-<li><a href="#gallery">Galerie</a></li>
-<li><a href="#reviews">Bewertungen</a></li>
-<li><a href="#location">Kontakt</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h4>Kontakt</h4>
-<ul>
-<li><a href="tel:+41432330145">043 233 01 45</a></li>
-<li><a href="#">Bahnhofstrasse 32</a></li>
-<li><a href="#">8304 Wallisellen</a></li>
-</ul>
-</div>
+  <div class="footer-brand">
+    <div class="footer-brand-name">Cabelo Vida</div>
+    <p>Lebendige Haare, ehrliche Beratung und ein Salon, in dem du dich zu Hause fühlst. Seit Jahren die erste Adresse für Haarpflege in Wallisellen.</p>
+    <div class="footer-social">
+      <a href="#" class="social-icon" aria-label="Facebook">f</a>
+      <a href="#" class="social-icon" aria-label="Instagram">✦</a>
+      <a href="mailto:info@cabelovida.ch" class="social-icon" aria-label="E-Mail">✉</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#services">Leistungen</a></li>
+      <li><a href="#gallery">Galerie</a></li>
+      <li><a href="#reviews">Bewertungen</a></li>
+      <li><a href="#location">Kontakt</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Kontakt</h4>
+    <ul>
+      <li><a href="tel:+41432330145">043 233 01 45</a></li>
+      <li><a href="#">Bahnhofstrasse 32</a></li>
+      <li><a href="#">8304 Wallisellen</a></li>
+    </ul>
+  </div>
 </div>
 <div class="footer-bottom">
-<p>© 2026 Cabelo Vida. Alle Rechte vorbehalten. Mit ♡ gestaltet.</p>
+  <p>© 2026 Cabelo Vida · Alle Rechte vorbehalten</p>
 </div>
 </footer>
 
-<a href="#hero" class="back-top" id="backTop">↑</a>
+<a href="#hero" class="back-top" id="backTop" aria-label="Nach oben">↑</a>
 
 <script>
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
-const observer = new IntersectionObserver((entries)=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
-},{threshold:0.15});
-revealEls.forEach(el=>observer.observe(el));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
 
-// Nav scroll
-window.addEventListener('scroll',()=>{
-document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);
-document.getElementById('backTop').classList.toggle('visible',window.scrollY>500);
+// Nav + Back-to-top on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('backTop').classList.toggle('visible', window.scrollY > 600);
 });
 
-// Parallax
-window.addEventListener('scroll',()=>{
-const hero=document.querySelector('.hero-bg');
-if(hero)hero.style.transform='translateY('+window.scrollY*0.4+'px)';
-});
+// Parallax hero
+window.addEventListener('scroll', () => {
+  const bg = document.getElementById('heroBg');
+  if (bg) bg.style.transform = 'translateY(' + (window.scrollY * 0.38) + 'px)';
+}, { passive: true });
+
+// Hamburger menu
+function toggleNav() {
+  const links = document.getElementById('navLinks');
+  const toggle = document.getElementById('navToggle');
+  links.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navToggle').classList.remove('open');
+}
 </script>
 </body>
 </html>
