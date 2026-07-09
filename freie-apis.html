@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freie APIs — Verzeichnis kostenloser öffentlicher APIs</title>
+<meta name="description" content="Durchsuchbares Verzeichnis von über 1400 kostenlosen öffentlichen APIs, eingebettet aus dem public-apis Projekt auf GitHub.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2c2c2c;--accent:#5b7cfa;--accent-light:#7e97fb;--dark:#0f1220;--light:#f5f6fa;--glass:rgba(255,255,255,0.08);--glass-border:rgba(91,124,250,0.25);--text:#2c2c2c;--text-light:#7a7a7a;--radius:14px;--shadow:0 8px 32px rgba(0,0,0,0.12);--green:#2fa25f;--red:#c05252;--amber:#b98a2e}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+header{background:linear-gradient(160deg,var(--dark) 0%,#1b2140 60%,#232a52 100%);color:#fff;padding:5rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+header::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% -20%,rgba(91,124,250,0.25),transparent 60%);pointer-events:none}
+.header-line{width:60px;height:1px;background:var(--accent);margin:0 auto 1.5rem}
+header h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;line-height:1.1;margin-bottom:1rem;position:relative;z-index:1}
+header h1 em{font-style:italic;color:var(--accent-light)}
+header p{max-width:640px;margin:0 auto;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.7;position:relative;z-index:1}
+header .source-note{margin-top:1.2rem;font-size:0.8rem;color:rgba(255,255,255,0.45)}
+header .source-note a{color:var(--accent-light);text-decoration:none}
+header .source-note a:hover{text-decoration:underline}
+
+.toolbar{position:sticky;top:0;z-index:100;background:rgba(15,18,32,0.97);backdrop-filter:blur(20px);padding:1rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.25)}
+.toolbar-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center}
+.search-wrap{flex:1 1 260px;position:relative}
+.search-wrap svg{position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:2;pointer-events:none}
+#search{width:100%;padding:0.7rem 1rem 0.7rem 2.5rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);color:#fff;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.3s}
+#search::placeholder{color:rgba(255,255,255,0.4)}
+#search:focus{border-color:var(--accent)}
+select{padding:0.7rem 2.2rem 0.7rem 0.9rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aab4e8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 0.8rem center;color:#fff;font-family:'Inter',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;appearance:none;max-width:230px}
+select option{background:var(--dark);color:#fff}
+.toggle{display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 0.9rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);color:rgba(255,255,255,0.75);font-size:0.8rem;cursor:pointer;user-select:none;transition:all 0.3s;white-space:nowrap}
+.toggle input{accent-color:var(--accent);cursor:pointer}
+.toggle:hover{border-color:var(--accent)}
+#count{color:rgba(255,255,255,0.5);font-size:0.8rem;white-space:nowrap;margin-left:auto}
+
+main{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 4rem}
+.status{text-align:center;padding:4rem 1rem;color:var(--text-light)}
+.status .spinner{width:36px;height:36px;border:3px solid rgba(91,124,250,0.2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 1.2rem;animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status button{margin-top:1rem;padding:0.7rem 1.6rem;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:0.85rem;cursor:pointer}
+.status button:hover{background:var(--accent-light)}
+
+.category-block{margin-bottom:2.8rem}
+.category-block h2{font-size:1.5rem;font-weight:700;margin-bottom:1.1rem;display:flex;align-items:baseline;gap:0.6rem}
+.category-block h2 .cat-count{font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:500;color:var(--text-light)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius);padding:1.2rem 1.3rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);transition:transform 0.25s,box-shadow 0.25s;display:flex;flex-direction:column;gap:0.55rem}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card a.api-name{font-weight:600;font-size:1rem;color:var(--primary);text-decoration:none}
+.card a.api-name:hover{color:var(--accent)}
+.card p{font-size:0.85rem;color:var(--text-light);line-height:1.55;flex:1}
+.badges{display:flex;flex-wrap:wrap;gap:0.4rem}
+.badge{font-size:0.68rem;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:0.25rem 0.55rem;border-radius:6px;background:rgba(0,0,0,0.05);color:var(--text-light)}
+.badge.ok{background:rgba(47,162,95,0.12);color:var(--green)}
+.badge.no{background:rgba(192,82,82,0.1);color:var(--red)}
+.badge.key{background:rgba(185,138,46,0.12);color:var(--amber)}
+
+footer{background:var(--dark);color:rgba(255,255,255,0.55);text-align:center;padding:2.5rem 2rem;font-size:0.82rem;line-height:1.8}
+footer a{color:var(--accent-light);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:640px){
+  header{padding:3.5rem 1.2rem 2.5rem}
+  .toolbar{padding:0.8rem 1.2rem}
+  #count{width:100%;margin-left:0;text-align:right}
+  main{padding:1.8rem 1.2rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-line"></div>
+  <h1>Freie <em>APIs</em> entdecken</h1>
+  <p>Ein durchsuchbares Verzeichnis von über 1400 kostenlosen, öffentlichen APIs — von Wetter über Finanzen bis Machine Learning. Die Liste wird live aus dem Open-Source-Projekt geladen und ist immer aktuell.</p>
+  <p class="source-note">Datenquelle: <a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis/public-apis</a> auf GitHub (MIT-Lizenz)</p>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input id="search" type="search" placeholder="API suchen … (z.B. Wetter, Krypto, Übersetzung)" autocomplete="off">
+    </div>
+    <select id="category">
+      <option value="">Alle Kategorien</option>
+    </select>
+    <label class="toggle"><input type="checkbox" id="f-noauth"> Ohne API-Key</label>
+    <label class="toggle"><input type="checkbox" id="f-https"> Nur HTTPS</label>
+    <label class="toggle"><input type="checkbox" id="f-cors"> CORS aktiviert</label>
+    <span id="count"></span>
+  </div>
+</div>
+
+<main>
+  <div id="status" class="status">
+    <div class="spinner"></div>
+    <p>Lade API-Verzeichnis von GitHub …</p>
+  </div>
+  <div id="results"></div>
+</main>
+
+<footer>
+  <p>Diese Seite bettet die frei verfügbare Liste des Projekts <a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis/public-apis</a> ein (MIT-Lizenz).<br>
+  Alle Angaben ohne Gewähr — Verfügbarkeit und Konditionen der einzelnen APIs können sich ändern.</p>
+</footer>
+
+<script>
+(function(){
+  var SOURCE='https://raw.githubusercontent.com/public-apis/public-apis/master/README.md';
+  var statusEl=document.getElementById('status');
+  var resultsEl=document.getElementById('results');
+  var countEl=document.getElementById('count');
+  var searchEl=document.getElementById('search');
+  var categoryEl=document.getElementById('category');
+  var fNoauth=document.getElementById('f-noauth');
+  var fHttps=document.getElementById('f-https');
+  var fCors=document.getElementById('f-cors');
+  var entries=[];
+
+  function stripMd(s){
+    // [text](url) -> text, remove backticks/asterisks
+    return s.replace(/\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/[`*]/g,'').trim();
+  }
+
+  function parseReadme(md){
+    var lines=md.split('\n');
+    var cat='';
+    var afterIndex=false;
+    var out=[];
+    for(var i=0;i<lines.length;i++){
+      var line=lines[i];
+      if(line.indexOf('## ')===0&&line.indexOf('###')!==0){
+        if(line.slice(3).trim().toLowerCase()==='index')afterIndex=true;
+        continue;
+      }
+      if(line.indexOf('### ')===0){
+        if(afterIndex)cat=line.slice(4).trim();
+        continue;
+      }
+      if(!cat||line.indexOf('| [')!==0&&line.indexOf('|[')!==0)continue;
+      var cells=line.split('|').map(function(c){return c.trim();}).filter(function(c,idx,arr){return !(idx===0&&c==='')&&!(idx===arr.length-1&&c==='');});
+      if(cells.length<5)continue;
+      var m=cells[0].match(/\[([^\]]+)\]\(([^)]+)\)/);
+      if(!m)continue;
+      var auth=stripMd(cells[2]).toLowerCase();
+      out.push({
+        name:m[1],
+        url:m[2],
+        desc:stripMd(cells[1]),
+        auth:auth==='no'||auth===''?'no':auth,
+        https:stripMd(cells[3]).toLowerCase()==='yes',
+        cors:stripMd(cells[4]).toLowerCase(),
+        cat:cat
+      });
+    }
+    return out;
+  }
+
+  function badge(txt,cls){return '<span class="badge '+cls+'">'+txt+'</span>';}
+
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+  function render(){
+    var q=searchEl.value.trim().toLowerCase();
+    var cat=categoryEl.value;
+    var noauth=fNoauth.checked, https=fHttps.checked, cors=fCors.checked;
+    var filtered=entries.filter(function(e){
+      if(cat&&e.cat!==cat)return false;
+      if(noauth&&e.auth!=='no')return false;
+      if(https&&!e.https)return false;
+      if(cors&&e.cors!=='yes')return false;
+      if(q&&(e.name+' '+e.desc+' '+e.cat).toLowerCase().indexOf(q)===-1)return false;
+      return true;
+    });
+    countEl.textContent=filtered.length+' von '+entries.length+' APIs';
+    var byCat={};
+    var order=[];
+    filtered.forEach(function(e){
+      if(!byCat[e.cat]){byCat[e.cat]=[];order.push(e.cat);}
+      byCat[e.cat].push(e);
+    });
+    var html='';
+    order.forEach(function(c){
+      html+='<section class="category-block"><h2>'+esc(c)+' <span class="cat-count">'+byCat[c].length+'</span></h2><div class="grid">';
+      byCat[c].forEach(function(e){
+        var authBadge=e.auth==='no'?badge('Kein Key','ok'):badge(esc(e.auth),'key');
+        var httpsBadge=e.https?badge('HTTPS','ok'):badge('Kein HTTPS','no');
+        var corsBadge=e.cors==='yes'?badge('CORS','ok'):(e.cors==='no'?badge('Kein CORS','no'):badge('CORS: '+esc(e.cors||'?'),''));
+        html+='<article class="card">'+
+          '<a class="api-name" href="'+esc(e.url)+'" target="_blank" rel="noopener nofollow">'+esc(e.name)+'</a>'+
+          '<p>'+esc(e.desc)+'</p>'+
+          '<div class="badges">'+authBadge+httpsBadge+corsBadge+'</div>'+
+        '</article>';
+      });
+      html+='</div></section>';
+    });
+    resultsEl.innerHTML=html||'<div class="status"><p>Keine APIs gefunden. Versuchen Sie einen anderen Suchbegriff oder weniger Filter.</p></div>';
+  }
+
+  function populateCategories(){
+    var cats=[];
+    entries.forEach(function(e){if(cats.indexOf(e.cat)===-1)cats.push(e.cat);});
+    cats.sort();
+    cats.forEach(function(c){
+      var o=document.createElement('option');
+      o.value=c;o.textContent=c;
+      categoryEl.appendChild(o);
+    });
+  }
+
+  function load(){
+    statusEl.innerHTML='<div class="spinner"></div><p>Lade API-Verzeichnis von GitHub …</p>';
+    statusEl.style.display='';
+    fetch(SOURCE).then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.text();
+    }).then(function(md){
+      entries=parseReadme(md);
+      if(!entries.length)throw new Error('Keine Einträge gefunden');
+      statusEl.style.display='none';
+      populateCategories();
+      render();
+    }).catch(function(err){
+      statusEl.innerHTML='<p>Das Verzeichnis konnte nicht geladen werden ('+esc(err.message)+').<br>Bitte prüfen Sie Ihre Internetverbindung.</p><button id="retry">Erneut versuchen</button>';
+      document.getElementById('retry').addEventListener('click',load);
+    });
+  }
+
+  var debounce;
+  searchEl.addEventListener('input',function(){clearTimeout(debounce);debounce=setTimeout(render,150);});
+  [categoryEl,fNoauth,fHttps,fCors].forEach(function(el){el.addEventListener('change',render);});
+  load();
+})();
+</script>
+</body>
+</html>
